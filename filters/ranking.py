@@ -7,6 +7,8 @@ SOURCE_SCORES = {
     "NVIDIA AI Blog": 8,
     "Hugging Face Blog": 8,
     "Mistral AI Blog": 8,
+    "Microsoft AI Blog": 9,
+    "Perplexity Blog": 8,
     "arXiv": 7,
     "GitHub Trending": 6,
     "Hacker News": 5,

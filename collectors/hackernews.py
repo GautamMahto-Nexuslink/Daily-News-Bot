@@ -10,6 +10,8 @@ AI_QUERIES = [
     "transformer", "neural network", "AI agent", "diffusion model",
     "Llama", "Mistral", "Qwen", "DeepSeek", "Ollama", "fine-tuning",
     "RAG", "vector database", "embedding model",
+    "xAI", "Grok", "Perplexity", "Microsoft AI", "Copilot AI",
+    "Hugging Face", "NVIDIA AI",
 ]
 
 

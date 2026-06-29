@@ -11,6 +11,8 @@ RSS_FEEDS = [
     ("NVIDIA AI Blog",      "https://blogs.nvidia.com/blog/category/artificial-intelligence/feed/"),
     ("Hugging Face Blog",   "https://huggingface.co/blog/feed.xml"),
     ("Mistral AI Blog",     "https://mistral.ai/news/rss.xml"),
+    ("Microsoft AI Blog",   "https://blogs.microsoft.com/ai/feed/"),
+    ("Perplexity Blog",     "https://www.perplexity.ai/hub/blog/feed"),
     ("Papers With Code",    "https://paperswithcode.com/latest.rss"),
     ("The Gradient",        "https://thegradient.pub/rss/"),
     ("Towards Data Science","https://towardsdatascience.com/feed"),

@@ -1,9 +1,11 @@
-AI_KEYWORDS = {
-    # Models & companies
-    "gpt", "claude", "gemini", "llama", "mistral", "qwen", "deepseek",
-    "gemma", "phi", "falcon", "bloom", "bert", "t5", "grok", "perplexity",
-    "openai", "anthropic", "deepmind", "google ai", "meta ai", "nvidia",
-    "hugging face", "huggingface", "cohere", "together ai", "groq",
+from filters.companies import TRACKED_COMPANIES
+
+_COMPANY_ALIASES = {alias for aliases in TRACKED_COMPANIES.values() for alias in aliases}
+
+AI_KEYWORDS = _COMPANY_ALIASES | {
+    # Additional models & providers not in tracked companies
+    "qwen", "deepseek", "gemma", "falcon", "bloom", "bert", "t5",
+    "cohere", "together ai", "groq", "xai",
     # Concepts
     "llm", "large language model", "transformer", "diffusion", "neural",
     "machine learning", "deep learning", "artificial intelligence", " ai ",
