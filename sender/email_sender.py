@@ -62,10 +62,18 @@ def _build_html(articles: list[dict], date_str: str) -> str:
         summary = a.get("summary", "")
         summary_html = f"<p style='color:#555;font-size:14px;margin:6px 0 0'>{summary[:300]}</p>" if summary else ""
         company_tags = _company_tags_html(a["title"], summary)
+
+        if a.get("_is_model_release"):
+            release_badge = "<span style='display:inline-block;margin-right:6px;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:#fff3e0;color:#e65100;border:1px solid #ffb74d'>🚀 NEW RELEASE</span>"
+            row_style = "padding:16px 0;border-bottom:1px solid #eee;border-left:3px solid #e65100;padding-left:12px"
+        else:
+            release_badge = ""
+            row_style = "padding:16px 0;border-bottom:1px solid #eee"
+
         rows += f"""
         <tr>
-          <td style='padding:16px 0;border-bottom:1px solid #eee'>
-            <b>{i}. <a href='{a["url"]}' style='color:#1a73e8;text-decoration:none'>{a["title"]}</a></b>
+          <td style='{row_style}'>
+            {release_badge}<b>{i}. <a href='{a["url"]}' style='color:#1a73e8;text-decoration:none'>{a["title"]}</a></b>
             <br><span style='color:#888;font-size:12px'>{emoji} {a["source"]}</span>
             {company_tags}
             {summary_html}
