@@ -29,3 +29,7 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "database", "history.sqlite")
 
 # Logging
 LOG_PATH = os.path.join(os.path.dirname(__file__), "logs", "bot.log")
+
+# Ensure required directories exist (logs/ and database/ may not be in git)
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
