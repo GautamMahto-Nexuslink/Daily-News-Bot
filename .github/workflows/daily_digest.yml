@@ -10,10 +10,10 @@ jobs:
   send-digest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.3.0
         with:
           python-version: "3.11"
           cache: "pip"
@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Restore SQLite history
-        uses: actions/cache@v4
+        uses: actions/cache@v4.2.3
         with:
           path: database/history.sqlite
           key: sqlite-history-${{ github.run_number }}
@@ -37,4 +37,4 @@ jobs:
           EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
           TOP_N_ARTICLES: "10"
           LOOKBACK_HOURS: "25"
-        run: python main.py
+        run: python3 main.py
