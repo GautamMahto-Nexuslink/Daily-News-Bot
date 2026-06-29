@@ -23,6 +23,7 @@ jobs:
 
       - name: Restore SQLite history
         uses: actions/cache@v4.2.3
+        continue-on-error: true
         with:
           path: database/history.sqlite
           key: sqlite-history-${{ github.run_number }}
