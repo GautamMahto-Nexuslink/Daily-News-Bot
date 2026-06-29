@@ -13,6 +13,7 @@ from filters.keywords import is_ai_relevant
 from filters.duplicate import init_db, filter_new, mark_sent
 from filters.ranking import rank
 from summarizer.ollama import summarize, truncate_summary
+from summarizer.scraper import fetch_snippet
 from sender import telegram as tg
 from sender import email_sender
 
@@ -75,14 +76,19 @@ def run():
     # 5. Take top N
     top = ranked[:TOP_N_ARTICLES]
 
-    # 6. Optionally summarize with Ollama
+    # 6. Summarize — Ollama if enabled, else scrape snippet from URL
     if OLLAMA_ENABLED:
         log.info("Summarizing with Ollama…")
         for article in top:
             article["summary"] = summarize(article["title"], article.get("summary", ""))
     else:
+        log.info("Fetching article snippets…")
         for article in top:
-            article["summary"] = truncate_summary(article.get("summary", ""), max_words=50)
+            existing = article.get("summary", "").strip()
+            if existing:
+                article["summary"] = truncate_summary(existing, max_words=50)
+            else:
+                article["summary"] = fetch_snippet(article["url"])
 
     # 7. Deliver
     date_str = datetime.now().strftime("%B %d, %Y")
