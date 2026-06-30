@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from config import EMAIL_SENDER, EMAIL_PASSWORD, EMAIL_RECIPIENT, SMTP_HOST, SMTP_PORT
+from config import EMAIL_SENDER, EMAIL_PASSWORD, EMAIL_RECIPIENTS, SMTP_HOST, SMTP_PORT
 from filters.companies import detect_companies
 
 SOURCE_EMOJI = {
@@ -27,21 +27,21 @@ COMPANY_COLORS = {
 
 
 def send_digest(articles: list[dict], date_str: str):
-    if not (EMAIL_SENDER and EMAIL_PASSWORD and EMAIL_RECIPIENT):
+    if not (EMAIL_SENDER and EMAIL_PASSWORD and EMAIL_RECIPIENTS):
         raise ValueError("Email credentials not configured")
 
     html = _build_html(articles, date_str)
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"🧠 AI Daily Digest — {date_str}"
     msg["From"] = EMAIL_SENDER
-    msg["To"] = EMAIL_RECIPIENT
+    msg["To"] = ", ".join(EMAIL_RECIPIENTS)
     msg.attach(MIMEText(html, "html"))
 
     with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
         server.ehlo()
         server.starttls()
         server.login(EMAIL_SENDER, EMAIL_PASSWORD)
-        server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENT, msg.as_string())
+        server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENTS, msg.as_string())
 
 
 def _company_tags_html(title: str, summary: str) -> str:

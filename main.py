@@ -6,7 +6,7 @@ from datetime import datetime
 from config import (
     DB_PATH, LOG_PATH, TOP_N_ARTICLES, OLLAMA_ENABLED,
     TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID,
-    EMAIL_SENDER, EMAIL_RECIPIENT,
+    EMAIL_SENDER, EMAIL_RECIPIENTS,
 )
 from collectors import hackernews, reddit, arxiv, blogs, github
 from filters.keywords import is_ai_relevant
@@ -102,7 +102,7 @@ def run():
         except Exception as exc:
             log.error(f"Telegram delivery failed: {exc}")
 
-    if EMAIL_SENDER and EMAIL_RECIPIENT:
+    if EMAIL_SENDER and EMAIL_RECIPIENTS:
         try:
             email_sender.send_digest(top, date_str)
             log.info(f"Sent {len(top)} articles via Email")
